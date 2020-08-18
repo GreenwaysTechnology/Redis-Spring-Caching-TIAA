@@ -1,0 +1,1719 @@
+Redis
+
+-What is Redis?
+
+ Redis stands for REmote Dictionary Server.
+
+
+REmote - Distributed
+
+Dictionary : 
+   Data Structure : Organization of data based on structure.
+Objective
+  store 
+  process
+  report
+
+  Store:
+     1.Persistent : Permanent
+       -Disk store
+          -Files
+             -Structured
+                    -Database Management System.
+			            -SQL-----------------------Reading,Processing,Write
+             -Unstructured
+                    -NO SQL Movement
+		    -Big Data
+     2.In Memory : not permanent
+
+In Memory Data Structure
+   Storing data inside RAM
+   Read data from RAM
+   Processing data from RAM.
+
+
+
+--Types of Data Structure
+  1.single dimension
+     Array
+        -Collection of data
+            -Ordered based on index
+            -index is location (memory address)
+       Subsets of Array
+	 -List : Dynamic Data Structure
+           SubSet of List
+		-LinkedList
+                -Stack
+                -Queue
+                -Set
+                  -SortedSet
+  2.two dimension
+       Key-Value Pair
+   
+   Dictionary
+      Other Names
+     ->Hash table
+     ->Map
+
+Redis is an open source (BSD licensed), in-memory data structure store.
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+Redis is nosql Database.
+
+Types of NoSql database
+- Key-Value
+- Document 
+- Column Family
+- Graph 
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Redis is  MultiModel.
+
+ Redis can be used  
+   -as key-value store
+   -as Document
+   -as Graph
+   -as Column family
+
+
+Redis has concept called "Redis Modules" which is plugable architecture , where we can plug
+ Modules on top of redis to extends Redis core functionality.
+
+
+RedisModules:
+
+->RedisSearch - fast searching patterns
+->RedisGraph - Graph db pattern 
+->RedisJSON - Document oriented pattern
+->pub-Sub- Message Queue
+->Streaming - storing stream based data.
+
+Note: You can create your own modules,custom modules and can be integrated with Redis.
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Redis Use cases:
+................
+
+1.Redis is used to store data in key-value - Acting as nosql key-value pair database.
+2.Redis is used as enterprise caching server. - LRU Algorthim
+3.Redis is used as Message Broker- Redis internally message broker- PUB/SUB
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Redis Architecture :
+
+Redis is written in c language.
+
+
+Redis Distribution:
+
+-open source - redis.io
+     is distributed as open source and free. any body can start using this directly.
+
+-enterprise - redis labs
+   commerical product, hosted on cloud default providing all administrative task easy
+ ,lot of tool support, pay as y use
+
+Both at core same.
+
+
+Redis and platforms:
+
+Redis can be compiled and used on Linux, OSX, OpenBSD, NetBSD and FreeBSD operating systems.
+
+
+Docker on windows / or any os:
+..............................
+
+>docker run --name redis -p 6379:6379  redis
+
+
+Cloud Distribution
+ redis can be used as service from any cloud provider.
+
+
+Redis tools:
+............
+
+-Redis-server is runtime which stores data.
+
+-Redis-cli is client command line tool , you can start using for basic operations and testing and admineration.
+
+Redis-cli is distributed along with Redis distribution, once redis is installed we can access it.
+
+Redis-cli can be accessed via docker as well.
+
+docker exec -it redis redis-cli
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Redis storage representation:
+
+In RDBMS, data is stored in tables, tables are collection of columns and rows, columns has type, based
+on type, only data is stored.
+eg- char,varchar,number,blog.......
+
+Since Redis is data Structure, Data Store , will store data in key value pair model.
+
+ KEY ---------VALUE
+
+KEY IS collection of  ASCII characters.
+
+VALUE Types are 
+>>strings
+>>hashes
+>>lists
+>>sets
+>>sorted set
+>>bitmap
+>>hyperloglogs
+>>geospatial indexs
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Redis and Persistency:
+.....................
+
+Redis stores all data in "RAM" only. You cant store data in DISK. Redis has been designed for IN MEMORY 
+Store.
+
+Why IN Memory?
+
+ -LATENCY
+To avoid latency in IO Operations.
+
+SQL DATABASES ARE slow , because lot of DISK IO Is involved.
+
+What if,
+   Redis Server is gone.
+               ----------------Data stored is also gone.
+
+
+Redis offers different persistency options.
+
+ Redis stores data in RAM only but at same, REDIS copies all in memory data to the disk.
+ this process is called "snapshots".
+
+RDB: Redis database file
+  -This is disk file, is created takes copy of the data at sepcified intervals.
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Redis and Scalability, High availablity:
+.......................................
+
+Scaling is nothing but , increasing no of same instances and also decreasing instances during load time.
+
+The scalling is nothing but replication.
+
+Types of Redis instance:
+
+1.master
+2.slaves
+
+
+Why replication?  :  scalability
+                              
+    Replicas are widely used for scalability purposes so that all read operations are
+handled by replicas and the master handles only write operations.
+
+
+Fail-over and Replicas:
+.....................
+
+      Replicas are very useful in a master failure scenario because they contain all of
+the most recent data and can be promoted to master
+
+
+Redis can be executed in single instance mode by default.
+
+
+Unfortunately, when Redis is running in single-instance mode, there is no automatic failover to promote a slave to master.
+
+
+How to Promote SLAVE To Master and handle failures 
+
+1.Using commands mannually
+2.Using automatic failover handling.
+	-Sentinel
+        -cluster
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Redis and Transactions:
+......................
+
+What if , i want to write sequence of  or set of write opertions to the Redis.
+
+[
+ a----->
+ b----->
+]
+
+Redis supports transactions which are seralized and executed sequentially. but updates in the memory happens in one go.
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+LUA  Scripting:
+..............
+
+Lua scripting language integreated with Redis, for writing pl-sql like programming.
+
+-auomation
+-batch processing
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Using Redis as an LRU(Least Recently Used) Cache:
+.................................................
+
+When redis is used as a cache, LRU algorthim is used.
+ -evit old data as you add new data.
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Lets code:
+..........
+
+How to store and reterive data ?
+
+Redis clients:
+..............
+
+1.Redis-cli - COMMAND LINE Interface
+2.Programming languages
+
+commands:
+commands are api , basically it is c api, we call that api by passing input parameters.
+
+add(10,10)------>execute add---return 20.
+
+Redis-cli or any programming language adapters sends sequence of commands to Redis server where server
+will run the commands.
+
+Redis-cli / any program<------TCP/IP----------------->Redis-Server
+
+
+Generic Syntax:
+
+ commandname key values....
+
+ set key value
+ get key value
+
+
+Types :
+
+Strings:
+
+Strings are the most basic kind of Redis value.
+Redis Strings are binary safe, this means that a Redis string can contain any kind of data, for instance a JPEG image or a serialized Ruby/JSON object.
+
+A String value can be at max 512 Megabytes in length
+
+You can do a number of interesting things using strings in Redis, for instance you can:
+.........................................................................................
+
+1.Use Strings as atomic counters using commands in the INCR family: INCR, DECR, INCRBY.
+2.Append to strings with the APPEND command.
+3.Use Strings as a random access vectors with GETRANGE and SETRANGE.
+4.Encode a lot of data in little space, or create a Redis backed Bloom Filter using GETBIT and SETBIT.
+
+
+Simple Strings
+
+1.Setting and Getting Values
+
+1.1.Set and get
+  set the variable and value
+  can be replaced with old value
+eg:
+
+>set name Subramanian
+OK
+>get name
+"Subramanian"
+
+
+Append :
+ will add string at end of the existing string, if not ,add that string.
+
+
+GetRange:
+ Get substring from the existing string
+
+
+Strlen
+ find total length of string.
+
+NUMERICAL Pattern:
+
+INCR,INCRBY INCRBYFLOAT
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+SETXXX
+SETEX
+
+SET mykey value
+EXPIRE mykey seconds
+
+Set key to hold the string value and set key to timeout after a given number of seconds.
+
+SETNX : SET 
+SET if Not eXists
+
+bitmaps:
+BitMaps are  a data type used within Redis and represents a long list of bits that contain 0 by default and we can use SETBIT Command to flip to 1 or 0
+
+
+Key                    Value                               type
+	
+a_bitmap     0 0 0  0 0 0 0 0 0 0 0 0 0 0                  binary string
+
+bitmap can store up to 2pow 32 bits,about 4 billion items
+
+Use case: login use case
+
+SETBIT logins:2017:04 6 1
+
+here login:2017:04 is key
+6 is offset , typically userid as offset
+1 is active bit
+
+SETBIT logins:2017:04 6 1
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+List:
+
+Sequence of items, 0th index based . like java list implementation.
+
+List is doubly linked list.
+
+you can add and remove items at any end.
+
+Think: 
+
+How to implement stack and Queue ?
+
+In Realtime , redis can be used as message broker.
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+Java and Redis:
+..............
+
+
+Java provides two major libs
+
+1.jedis
+2.Lettuce
+
+Lettuce:
+
+It is advanced redis wrapper.
+
+-Reactive,functional style wrapper.
+
+Redis can be connected in non blocking and reactive.
+
+Where lettuce helps to connect and query redis in async and nonblocking way.
+
+Jedis:
+
+package com.mycom.jedis;
+
+import redis.clients.jedis.Jedis;
+
+public class HelloWorldJedis {
+    public static void main(String[] args) {
+        Jedis jedis = new Jedis("localhost", 6379);
+        System.out.println(jedis.ping());
+
+    }
+}
+
+Strings:
+package com.mycom.jedis.types;
+import redis.clients.jedis.Jedis;
+
+public class StringsKeyDemo {
+    public static void main(String[] args) {
+        Jedis jedis = new Jedis("localhost", 6379);
+
+        //strings
+        //set and get
+        System.out.println(jedis.set("name","xxx"));
+        System.out.println(jedis.get("name"));
+
+
+    }
+}
+
+
+
+
+Lettuce:
+
+package com.mycom.lettuce;
+
+import io.lettuce.core.RedisClient;
+import io.lettuce.core.api.StatefulRedisConnection;
+import io.lettuce.core.api.sync.RedisCommands;
+
+public class HelloWorldLettuce {
+    public static void main(String[] args) {
+        RedisClient redisClient = RedisClient.create("redis://localhost:6379");
+        StatefulRedisConnection<String, String> connection = redisClient.connect();
+        RedisCommands<String, String> syncCommands = connection.sync();
+        System.out.println(syncCommands.get("name"));
+        System.out.println(syncCommands.ping());
+        connection.close();
+        redisClient.shutdown();
+    }
+}
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+Spring Boot Integration:
+........................
+
+spring-boot-data-starter-redis:
+
+
+Connecting Redis:
+
+org.springframework.data.redis.connection package contains redis related api.
+
+
+api:
+
+RedisConnection:
+
+-Provides the core building block for redis communication.
+-It handles the communication with the redis back end.
+-It also automatically translates the underlying connections exections to Spring consistentent DAO  Exception
+-RedisConnection uses tcp channel to send and recevice data.
+
+How to create RedisConnection?
+  RedisConnection is interface,its implementations are provided by implemenation classes.
+Implementation classes provided by low level java libs 
+  -jedis, lettuce.
+
+Spring comunnicates jedis/lettuce to get low level communcation.
+
+Spring abstracts even getting connection information from the libs..
+
+
+RedisConnectionFactory:
+-It is factory class/bean used to create Redisactive connections.
+
+RedisConnectionFactory internally uses JeddisConnectionFactory or LettuceConnectionFactory
+
+
+How to create ConnectionFactory/How to configure Connection factory:
+
+Through @Configuration and @Bean annotation.
+
+package com.tiaa.redis;
+
+import lombok.extern.java.Log;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
+
+@Configuration
+@Log
+public class AppConfig {
+    //connections
+    @Bean
+    public LettuceConnectionFactory lettuceConnectionFactory() {
+        RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
+        configuration.setHostName("localhost");
+        configuration.setPort(6379);
+        log.info("connection factory is initalized : LettuceConnectionFactory ");
+        return new LettuceConnectionFactory(configuration);
+    }
+
+    //jedis configuration
+//    @Bean
+//    public JedisConnectionFactory jedisConnectionFactory() {
+//        RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
+//        configuration.setHostName("localhost");
+//        configuration.setPort(6379);
+//        log.info("connection factory is initalized : JedisConnectionFactory ");
+//
+//        return new JedisConnectionFactory(configuration);
+//    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+RedisTemplate:
+
+
+RedisTemplate looks like other templating arch in spring.
+
+In fact, the Temlates are high level abstraction for application level communication.
+
+eg:jdbcTemplate,jpaTemplate,restTemplate.......
+
+RedisTemplate:
+............
+-The template offers a high-level abstraction for redis interaction.
+ Where redis connection offers low level methods that accept and return binary values-byte arrays.
+
+Seralization and Deseralization:
+-Template takes cares of seralization,deseralization ,and connection managment.
+-template sends commands  to redis server looks like redis command list.
+
+RedisTemplate offers Operational Views:
+
+-String Operations.
+
+ OperationalView Api
+
+ template.ValueOperations ----Template<Key,Value>
+ 
+SetOperations
+ZsetOperations
+GeoOperations
+ListOperations
+SetOperations
+
+
+package com.tiaa.redis;
+
+import lombok.extern.java.Log;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+
+@SpringBootApplication
+@Log
+public class MyredisappApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(MyredisappApplication.class, args);
+    }
+
+    //Application Runner to send and receive data.
+    private ApplicationRunner titledRunner(String title, ApplicationRunner rr) {
+        return args -> {
+            log.info(title.toUpperCase() + ":");
+            rr.run(args);
+        };
+    }
+
+    //bean to send simple string
+    @Bean
+    ApplicationRunner demoStrings(RedisTemplate<String, String> rt) {
+
+        return titledRunner("Strings ", args -> {
+            ValueOperations<String, String> operations = rt.opsForValue();
+            operations.set("name", "Subramanian");
+        });
+    }
+
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Redis Message Broker:
+....................
+
+    @Bean
+    RedisMessageListenerContainer listener(RedisConnectionFactory cf) {
+        //Callback function/listner will be called as soon as messsage available in the channel
+        MessageListener ml = (message, pattern) -> {
+            //get the message
+            String str = new String(message.getBody());
+            log.info("Message from " + channel + str);
+
+        };
+        RedisMessageListenerContainer mlc = new RedisMessageListenerContainer();
+        mlc.addMessageListener(ml, new PatternTopic(channel));
+        //Listener container must be assocaited with ConnectionFactory
+        mlc.setConnectionFactory(cf);
+        return mlc;
+
+    }
+    //pub/sub
+    @Bean
+    ApplicationRunner pubSub(RedisTemplate<String, String> rt) {
+        return titledRunner("Publisher and Subscriber", args -> {
+            Thread.sleep(5000);
+            rt.convertAndSend(channel, "Hello World @" + Instant.now().toString());
+        });
+    }
+
+
+
+package com.tiaa.redis;
+
+import lombok.extern.java.Log;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.geo.Circle;
+import org.springframework.data.geo.Distance;
+import org.springframework.data.geo.GeoResults;
+import org.springframework.data.geo.Point;
+import org.springframework.data.redis.connection.MessageListener;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.RedisGeoCommands;
+import org.springframework.data.redis.core.GeoOperations;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.listener.PatternTopic;
+import org.springframework.data.redis.listener.RedisMessageListenerContainer;
+
+import java.time.Instant;
+
+@SpringBootApplication
+@Log
+public class MyredisappApplication {
+
+    private String channel = "chatchannel";
+
+    public static void main(String[] args) {
+        SpringApplication.run(MyredisappApplication.class, args);
+    }
+
+    //Application Runner to send and receive data.
+    private ApplicationRunner titledRunner(String title, ApplicationRunner rr) {
+        return args -> {
+            log.info(title.toUpperCase() + ":");
+            rr.run(args);
+        };
+    }
+
+    //bean to send simple string
+    @Bean
+    ApplicationRunner demoStrings(RedisTemplate<String, String> rt) {
+
+        return titledRunner("Strings ", args -> {
+            ValueOperations<String, String> operations = rt.opsForValue();
+            operations.set("name", "Subramanian");
+        });
+    }
+
+    //sending  Geo operations
+    @Bean
+    ApplicationRunner geography(RedisTemplate<String, String> rt) {
+        return titledRunner("GeoOperatoins", args -> {
+            GeoOperations<String, String> geo = rt.opsForGeo();
+            geo.add("Sicily", new Point(13.361389, 38.1155556), "Arigento");
+            geo.add("Sicily", new Point(15.087269, 37.502669), "Catania");
+            geo.add("Sicily", new Point(13.583333, 37.316667), "Palermo");
+            Circle circle = new Circle(new Point(13.583333, 37.316667),
+                    new Distance(100, org.springframework.data.redis.connection.RedisGeoCommands.DistanceUnit.KILOMETERS));
+            GeoResults<RedisGeoCommands.GeoLocation<String>> geoResults = geo.radius("Sicily", circle);
+            geoResults
+                    .getContent()
+                    .forEach(c -> log.info(c.toString()));
+        });
+    }
+
+    //Listener
+    @Bean
+    RedisMessageListenerContainer listener(RedisConnectionFactory cf) {
+        //Callback function/listner will be called as soon as messsage available in the channel
+        MessageListener ml = (message, pattern) -> {
+            //get the message
+            String str = new String(message.getBody());
+            log.info("Message from " + channel + str);
+
+        };
+        RedisMessageListenerContainer mlc = new RedisMessageListenerContainer();
+        mlc.addMessageListener(ml, new PatternTopic(channel));
+        //Listener container must be assocaited with ConnectionFactory
+        mlc.setConnectionFactory(cf);
+        return mlc;
+
+    }
+
+    //pub/sub
+    @Bean
+    ApplicationRunner pubSub(RedisTemplate<String, String> rt) {
+        return titledRunner("Publisher and Subscriber", args -> {
+            Thread.sleep(5000);
+            rt.convertAndSend(channel, "Hello World @" + Instant.now().toString());
+        });
+    }
+
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Spring data Repsitories: CURD repository:
+
+package com.tiaa.redis;
+
+import lombok.extern.java.Log;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
+
+@Configuration
+@Log
+@EnableRedisRepositories
+public class AppConfig {
+    //connections
+    @Bean
+    public LettuceConnectionFactory lettuceConnectionFactory() {
+        RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
+        configuration.setHostName("localhost");
+        configuration.setPort(6379);
+        log.info("connection factory is initalized : LettuceConnectionFactory ");
+        return new LettuceConnectionFactory(configuration);
+    }
+
+    @Bean
+    public RedisTemplate redisTemplate() {
+        RedisTemplate<?, ?> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(lettuceConnectionFactory());
+        return redisTemplate;
+    }
+
+    //jedis configuration
+//    @Bean
+//    public JedisConnectionFactory jedisConnectionFactory() {
+//        RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
+//        configuration.setHostName("localhost");
+//        configuration.setPort(6379);
+//        log.info("connection factory is initalized : JedisConnectionFactory ");
+//
+//        return new JedisConnectionFactory(configuration);
+//    }
+}
+
+
+eg;
+
+package com.tiaa.redis.entity;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.core.index.Indexed;
+
+@AllArgsConstructor
+@Getter
+@Builder
+@RedisHash
+public class Person {
+    private String id;
+    @Indexed
+    private String firstName;
+    private String lastName;
+    private Address address;
+}
+package com.tiaa.redis.entity;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
+@Builder
+public class Address {
+    private String street;
+    private String city;
+    private String state;
+    private String zipcode;
+}
+
+
+package com.tiaa.redis.repository;
+
+import com.tiaa.redis.entity.Person;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface PersonRepository extends CrudRepository<Person, String> {
+    List<Person> findByFirstName(String name);
+
+    List<Person> findByLastName(String name);
+}
+package com.tiaa.redis.controller;
+
+import com.tiaa.redis.entity.Address;
+import com.tiaa.redis.entity.Person;
+import com.tiaa.redis.repository.PersonRepository;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+public class PersonController {
+    private PersonRepository repository;
+
+    public PersonController(PersonRepository repository) {
+        this.repository = repository;
+    }
+
+    @GetMapping("/persons")
+    public ResponseEntity<Iterable<Person>> personList() {
+        Iterable<Person> allRecords = repository.findAll();
+        return ResponseEntity.ok(allRecords);
+    }
+
+    @GetMapping("/personsByFirstName/{firstName}")
+    public ResponseEntity<Iterable<Person>> personsByFirstName(@PathVariable String firstName) {
+        List<Person> personList = repository.findByFirstName(firstName);
+        return ResponseEntity.ok(personList);
+    }
+
+    //save
+    @GetMapping("/save")
+    public ResponseEntity<String> save(@RequestParam String firstName, @RequestParam String lastName) {
+        Person person = Person.builder()
+                .firstName(firstName)
+                .lastName(lastName)
+                .address(Address.builder()
+                        .street("some street")
+                        .city("some city")
+                        .build()).build();
+        Person savedPerson = repository.save(person);
+        return ResponseEntity.ok(savedPerson.getId());
+    }
+}
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+Lab:
+Store and Reterive order information:
+One Order can have list of LineItems
+Order
+ -id
+ -Date of Order
+ -List of Line items
+
+LineItem
+ orderId
+ id
+ description
+OrderRepository
+OrderService
+OrderController
+
+LineItemRepository
+LineItemService
+LineItemController
+
+class Order{
+  @Reference
+  List<LineItems> items
+}
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Redis server can be started in two mode
+
+-standalone server mode
+-cluster mode
+
+Redis server reads default settings from redis.conf file by default.
+if not then it reads from program.
+
+redis server can override configuration, which we can read from redis.conf file.
+
+./redis-server -conf redis.conf
+
+configuration can be supplied via commandline.
+
+Start Redis server in cluster mode 
+
+./redis-server -clusterenabled=yes
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Caching:
+
+What is Caching ?
+In computing, a cache is a component that transparently stores data so that future requests
+for that data can be served faster.
+
+Without Cache flow:
+
+Request 1
+SQL - select * from where id=1
+ ------------------------------------>execute sql ----db engine will disk io ----read from disk file
+                                                                     |
+User data <---------- ----     writes data into RAM <----------------
+ 
+Request 2
+SQL - select * from where id=1 --------------->execute sql ----db engine will do disk io ----read from                                                                 disk file
+                                                                     |
+User data <---------- ----     writes data into RAM <----------------
+
+
+
+
+With Cache flow:
+
+Request 1
+SQL - select * from where id=1
+ --------------------------------->execute sql ----db engine will disk io --Cache--read from disk file
+                                                                                           |
+User data <---------- ----     writes data into RAM <----------------
+ 
+Request 2
+SQL - select * from where id=1 --------------->execute sql --cache--db engine will do disk io ----read from                                                                 disk file
+                                                                |
+User data <---------- ----     writes data into RAM <--------------
+
+
+
+Cache Terminallogies:
+
+-Cache:
+  The place where data is stored
+
+-Cache hit
+ User ---req-----cache
+ This request can be served by simply reading the cache, which is comparatively faster.
+ Cache hit means the requested data already there in the cache.
+
+-Cache miss
+Otherwise (cache miss), the data has to be recomputed or fetched from its original storage location, which is comparatively slower
+
+Caching Implementations
+-Hardware cache
+-Network cache
+-Software caches
+   -DISK
+   -Web
+   -database
+   -networking
+   -application level
+
+
+Types of Caches:
+
+-Local Cache
+  Cache is maintained inside application.
+
+-Data Grid /Distributed Cache
+  Cache is maintained outside application.
+
+-Document Store, JPA First Level Cache, JPA Second Level Cache,Hybrid Cache
+
+Places of Cache:
+
+1.Database, Heap, HTTP Proxy, Browser,
+2.Processor, Disk, Off Heap, 
+3.Persistence
+4.Framework, Application
+
+
+We will focus on local and  distributed caching at the application level with the Spring
+Framework
+
+Caching Best Pratices:
+......................
+
+Where shall I cache?
+Identify suitable layers for caching
+
+Local Cache:
+ -Part of application
+ -easy to implement
+ -very fast, no lantency.
+-as application shuts down, no where data is persisted.
+-it is diffcult in concurrency
+-data cant be replicated
+
+
+-Local and Cluster:
+-Data should be available across all cluster of nodes
+-if data is updated in one node, either you have to delete data in all nodes and add new data,
+ you have to replicate by overriding existing data sets.
+
+
+Local cache and memory memory management:
+
+As of now every cache could potentially hold every data which consumes heap memory.
+
+
+Avoid big heaps just for caching
+
+Big heap leads to long major GCs
+
+General cache implementation:
+..............................
+
+-Small datastructure 
+  -Key-value
+ -Dictionary
+
+How to apply algorthim 
+-Hash table + bi directional doubly linked list.
+
+Cache Eviction policy:LRU - Least Recently Used:
+
+
+Eviction means basically deleation or removal of key and value entry from the Cache memory.
+
+Why we need to do that?
+
+Cache is lot expensive We cant keep on  scaling them?
+
+
+All key and values stored in the cache always used very often.
+
+We need to know some how , what are the keys and values not been used for long time or which never used
+simply sitting in the memory ideally. so we have to remove them so that we can make space for the new
+key value  pair which application writing to the cache that is called "Cache Eviction Policy".
+
+We need to build alogorthims to evit those unused or never used keys and values.
+So many alogorthims available but best one is "LRU".
+
+Finding keys and values in o(n) is expensive
+Finding Keys and values in o(1) is perfect. - Least Recently used
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Distributed Cache / Data Grid:
+.............................
+
+Use a distributed cache for big amounts of data
+
+Distributed caches implemented cache nodes.
+
+Cache Nodes:
+Hazelcast
+Redis
+memcached
+Appache zoo keeper
+Generic.
+EhCache 2. x.
+Hazelcast.
+Infinispan.
+Redis.
+....
+
+Which data has to be cached
+Make sure that only suitable data gets cached
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+Lets Cache Implementations:
+
+Introduce Caching in three steps
+
+Application----->local cache----->distributed cache
+
+Data transfer between application and Caching System;
+.......................................................
+
+
+ Application----data----|Seralization and Deseralization|---------------------Cache Provider
+
+JAVA SERIALIZATION SUCKS
+
+if you introduce redis, by default spring attaches redis seralization process
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Spring and Caching:
+..................
+
+Code classiffication
+
+1.biz code /application
+ 
+ which biz compuation
+  save,update,delete,compute
+
+2.infra structure code / boiler plate code.
+
+  The code is neccessary to run application but not necessary for the developer / in the source code.
+
+eg:
+  Logger
+  Transaction management
+  Resource management
+  Setter and getter
+  Constructors
+
+infra code in spring is attached to main application via instrumentation
+  -meta programming
+     -annotations
+  aop
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Spring applies abstraction for most of the code today.
+
+ DATA BASE Abstraction.
+    JPA ----Reposiotries---CURD
+ WEB ABSTRACTION
+   -ON TOMCAT,NETTY
+
+CACHING ABSTRACTION:
+...................
+Spring offers caching solutions via common abstraction apis, irrrespective of cache types and Providers.
+  
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Declarative and Imperative:
+..........................
+
+Declarative means annotation or config based programming
+Imperative means everything you have to write in code.
+
+
+Declarative annotation-based caching
+
+For caching declaration, the abstraction provides a set of Java annotations:
+
+@Cacheable triggers cache population
+@CacheEvict triggers cache eviction
+@CachePut updates the cache without interfering with the method execution
+@Caching regroups multiple cache operations to be applied on a method
+@CacheConfig shares some common cache-related settings at class-level
+
+@EnableCaching - Enable caching behaviour to the application
+
+CacheManager ---- Provider who provides Caching
+
+
+                                       Application
+				       (Caching)
+					   |
+				      CacheManager
+					   |
+				---------------------------------- Cache Providers
+				|  |   |  |                       |
+	                       LocalCache / Distributed
+				   |              |
+			     ConcurrentHashMap	  Redis,MemCache,EHCach,Haelzcast......
+
+
+Steps:
+
+1.Create Spring boot mvc project
+    -web,jpa or mongo.......
+
+2.Add CachProviders - Redis
+
+3.add cache abstraction api dependency.
+
+
+	        <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+		</dependency>
+
+
+
+1.Enable caching annotations
+............................
+
+@Configuration
+@EnableCaching
+public class AppConfig {
+}
+
+
+@SpringBootApplication
+@EnableCaching
+public class SpringBootMongoDbcrudrestServicesApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SpringBootMongoDbcrudrestServicesApplication.class, args);
+    }
+}
+
+
+Configuring the cache storage
+-JDK ConcurrentMap-based Cache
+- Ehcache-based Cache
+-Caffeine Cache
+-Guava Cache
+-GemFire-based Cache
+-Hazelcast
+-Redis
+etc...
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+What to cache?
+
+You have to apply caching on methods.
+
+@Cacheable triggers cache population
+
+
+As the name implies, @Cacheable is used to demarcate methods that are cacheable - that is, methods for whom the result is stored into the cache so on subsequent invocations (with the same arguments), the value in the cache is returned without having to actually execute the method. 
+
+In its simplest form, the annotation declaration requires the name of the cache associated with the annotated method:
+
+@Cacheable("books")
+public Book findBook(ISBN isbn) {...}
+
+
+In the snippet above, the method findBook is associated with the cache named books. Each time the method is called, the cache is checked to see whether the invocation has been already executed and does not have to be repeated. 
+
+
+Api 1 -------------Api2-------Api3
+
+                  @cacheable
+User ------------>find(){} ----------find()------trigers some db calls
+
+cache miss / cache hit
+
+
+books:some-key
+isbns:some-key
+
+
+@Cacheable({"books", "isbns"})
+public Book findBook(ISBN isbn) {...}
+, the annotation allows multiple names to be specified so that more than one cache are being used. In this case, each of the caches will be checked before executing the method - if at least one cache is hit, then the associated value will be returned:
+
+
+Keys:
+....
+Since caches are essentially key-value stores, each invocation of a cached method needs to be translated into a suitable key for cache access. Out of the box, the caching abstraction uses a simple KeyGenerator based on the following algorithm:
+
+If no params are given, return SimpleKey.EMPTY.
+   findBooks()
+If only one param is given, return that instance.
+
+If more the one param is given, return a SimpleKey containing all parameters.
+
+The @Cacheable annotation allows the user to specify how the key is generated through its key attribute
+
+The developer can use SpEL to pick the arguments of interest (or their nested properties), perform operations or even invoke arbitrary methods without having to write any code or implement any interface. 
+
+
+ SpEL declarations
+
+@Cacheable(cacheNames="books", key="#isbn")
+public Book findBook(ISBN isbn, boolean checkWarehouse, boolean includeUsed)
+
+@Cacheable(cacheNames="books", key="#isbn.rawNumber")
+public Book findBook(ISBN isbn, boolean checkWarehouse, boolean includeUsed)
+
+@Cacheable(cacheNames="books", key="T(someType).hash(#isbn)")
+public Book findBook(ISBN isbn, boolean checkWarehouse, boolean includeUsed)
+
+If the algorithm responsible to generate the key is too specific or if it needs to be shared, you may define a custom keyGenerator on the operation. To do this, specify the name of the KeyGenerator bean implementation to use:
+
+@Cacheable(cacheNames="books", keyGenerator="myKeyGenerator")
+public Book findBook(ISBN isbn, boolean checkWarehouse, boolean includeUsed)
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Multi threading and caching:
+
+ if  a  method is by multiple thread of execution , there might be inconsistency in data reterival.
+
+
+Synchronized caching
+
+In a multi-threaded environment, certain operations might be concurrently invoked for the same argument (typically on startup). By default, the cache abstraction does not lock anything and the same value may be computed several times, defeating the purpose of caching.
+
+For those particular cases, the sync attribute can be used to instruct the underlying cache provider to lock the cache entry while the value is being computed. As a result, only one thread will be busy computing the value while the others are blocked until the entry is updated in the cache.
+
+@Cacheable(cacheNames="foos", sync=true)
+public Foo executeExpensiveOperation(String id) {...}
+
+This is an optional feature and your favorite cache library may not support it. All CacheManager implementations provided by the core framework support it. Check the documentation of your cache provider for more details.
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+Conditional Caching:
+
+if a service calls a method for given parameter, i dont want to cache all parameters, i want to cache only specific parameters..
+
+ findByCity(String cityName)
+
+ i want to cache data related to  particular city let says,  cache only banaglore specific data.
+
+Sometimes, a method might not be suitable for caching all the time (for example, it might depend on the given arguments). The cache annotations support such functionality through the condition parameter which takes a SpEL expression that is evaluated to either true or false. If true, the method is cached - if not, it behaves as if the method is not cached, that is executed every time no matter what values are in the cache or what arguments are used. A quick example - the following method will be cached only if the argument name has a length shorter than 32:
+
+@Cacheable(cacheNames="book", condition="#name.length() < 32")
+public Book findBook(String name)
+
+
+Unlike condition, unless expressions are evaluated after the method has been called. Expanding on the previous example - perhaps we only want to cache paperback books:
+
+@Cacheable(cacheNames="book", condition="#name.length() < 32", unless="#result.hardback")
+public Book findBook(String name)
+
+
+condition vs unless 
+  both are same.
+
+condition is applied before method execution
+unless is appled after method execution.
+
+
+The cache abstraction supports java.util.Optional, using its content as cached value only if it present. #result always refers to the business entity and never on a supported wrapper so the previous example can be rewritten as follows:
+
+@Cacheable(cacheNames="book", condition="#name.length() < 32", unless="#result?.hardback")
+public Optional<Book> findBook(String name)
+Note that result still refers to Book and not Optional. As it might be null, we should use the safe navigation operator.
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+@CachePut annotation:
+...................
+@CachePut(cacheNames="book", key="#isbn")
+public Book updateBook(ISBN isbn, BookDescriptor descriptor)
+
+"Note that using @CachePut and @Cacheable annotations on the same method is generally strongly discouraged because they have different behaviors. While the latter causes the method execution to be skipped by using the cache, the former forces the execution in order to execute a cache update"
+
+
+
+@CacheEvict annotation:
+.......................
+The cache abstraction allows not just population of a cache store but also eviction
+
+This process is useful for removing stale or unused data from the cache.
+
+ Opposed to @Cacheable, annotation @CacheEvict demarcates methods that perform cache eviction, that is methods that act as triggers for removing data from the cache. 
+
+Just like its sibling, @CacheEvict requires specifying one (or multiple) caches that are affected by the action, allows a custom cache and key resolution or a condition to be specified but in addition, features an extra parameter allEntries which indicates whether a cache-wide eviction needs to be performed rather then just an entry one (based on the key):
+
+@CacheEvict(cacheNames="books", allEntries=true)
+public void loadBooks(InputStream batch)
+
+
+
+
+@Caching annotation
+There are cases when multiple annotations of the same type, such as @CacheEvict or @CachePut need to be specified, for example because the condition or the key expression is different between different caches. @Caching allows multiple nested @Cacheable, @CachePut and @CacheEvict to be used on the same method:
+
+@Caching(evict = { @CacheEvict("primary"), @CacheEvict(cacheNames="secondary", key="#p0") })
+public Book importBooks(String deposit, Date date)
+
+
+
+@CacheConfig annotation
+So far we have seen that caching operations offered many customization options and these can be set on an operation basis. 
+
+However, some of the customization options can be tedious to configure if they apply to all operations of the class. For instance, specifying the name of the cache to use for every cache operation of the class could be replaced by a single class-level definition.
+This is where @CacheConfig comes into play.
+
+@CacheConfig("books")
+public class BookRepositoryImpl implements BookRepository {
+
+    @Cacheable
+    public Book findBook(ISBN isbn) {...}
+}
+
+Spring vs. JSR-107 caching annotations
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+code:
+
+
+
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+
+@Configuration
+class BeanConfig {
+
+    @Bean
+    JedisConnectionFactory jedisConnectionFactory() {
+        RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration("localhost", 6379);
+        return new JedisConnectionFactory(redisStandaloneConfiguration);
+    }
+
+    @Bean
+    public RedisTemplate redisTemplate() {
+        RedisTemplate<?, ?> template = new RedisTemplate<>();
+        template.setConnectionFactory(jedisConnectionFactory());
+        return template;
+    }
+}
+
+@SpringBootApplication
+@EnableCaching
+public class SpringBootMongoDbcrudrestServicesApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SpringBootMongoDbcrudrestServicesApplication.class, args);
+    }
+}
+
+
+
+
+
+
+package com.example.demo.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.model.Person;
+import com.example.demo.service.PersonService;
+
+@RestController
+public class PersonController {
+
+	@Autowired
+	private PersonService personService;
+	
+	@CachePut(value="persons",key="#firstName")
+	@RequestMapping("/create")
+	@ResponseBody
+	public Person create(@RequestParam String firstName, @RequestParam String lastName, @RequestParam int age) {
+		System.out.println("Creating record ");
+		Person p = personService.create(firstName, lastName, age);
+		return p;
+	}
+	@Cacheable(value= "persons",key="#firstName",condition="#firstName.length() > 4",unless="#result.age>35")
+	@RequestMapping("/get")
+	@ResponseBody
+	public Person getPerson(@RequestParam String firstName) {
+		System.out.println("Getting record");
+		return personService.getByFirstName(firstName);
+	}
+	@Cacheable(value= "persons")
+	@RequestMapping("/getAll")
+	public List<Person> getAll(){
+		System.out.println("Getting all records");
+		return personService.getAll();
+	}
+	@CachePut(value="persons",key="#firstName")
+	@RequestMapping("/update")
+	@ResponseBody
+	public Person update(@RequestParam String firstName, @RequestParam String lastName, @RequestParam int age) {
+		System.out.println("Updating record");
+		Person p = personService.update(firstName, lastName, age);
+		return p;
+	}
+	@CacheEvict(value="persons",key="#firstName")
+	@RequestMapping("/delete")
+	public String delete(@RequestParam String firstName) {
+		System.out.println("Deleting record");
+		personService.delete(firstName);
+		return "Deleted "+firstName;
+	}
+	@CacheEvict(value="persons",allEntries=true)
+	@RequestMapping ("/deleteAll")
+	public String deleteAll() {
+		System.out.println("Deleting all records");
+		personService.deleteAll();
+		return "Deleted all records";
+	}
+	@CacheEvict(value="persons",allEntries=true)
+	@RequestMapping("/clearCache")
+	public String clearCache() {
+		return "Cleared cache";
+	}
+	
+}
+
+
+package com.example.demo.model;
+
+import java.io.Serializable;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
+public class Person implements Serializable{
+	@Id
+	String id;
+	String firstName;
+	String lastName;
+	int    age;
+	
+	public Person(String firstName, String lastName, int age) {
+		this.firstName = firstName;
+		this.lastName  = lastName;
+		this.age       = age;
+		
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+}
+package com.example.demo.repository;
+
+import java.util.List;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.model.Person;
+
+@Repository
+public interface PersonRepository extends MongoRepository<Person, String>{
+   public Person findByFirstName(String firstName);
+   public List<Person> findByAge(int age);
+}
+
+package com.example.demo.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.model.Person;
+import com.example.demo.repository.PersonRepository;
+
+@Service
+public class PersonService {
+   
+	@Autowired
+	private PersonRepository personRepository;
+	
+	//Create operation
+	public Person create(String firstName,String lastName, int age) {
+		return personRepository.save(new Person(firstName, lastName, age));
+	}
+	//Retrieve operation
+	public List<Person> getAll(){
+		return personRepository.findAll();
+	}
+	public Person getByFirstName(String firstName) {
+		return personRepository.findByFirstName(firstName);
+	}
+	//Update operation
+	public Person update(String firstName, String lastName, int age) {
+		Person p = personRepository.findByFirstName(firstName);
+		p.setLastName(lastName);
+		p.setAge(age);
+		return personRepository.save(p);
+	}
+	//Delete operation
+	public void deleteAll() {
+		personRepository.deleteAll();
+	}
+	public void delete(String firstName) {
+		Person p = personRepository.findByFirstName(firstName);
+		personRepository.delete(p);
+	}
+}
+spring.data.mongodb.uri=mongodb://localhost:27017/test
+#spring.data.mongodb.uri=mongodb://username:password@host:port/database
+
+server.port=8780
+spring.redis.host=localhost 
+spring.redis.port=6379
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Build Shopping Cart using Redis as backEnd
+-Add new item into cart
+-Search cart by id
+-Update new Cart data
+-Delete exiting Cart.
+
+-Build Rest end point through which you send and recieve data to redis server.
+
+-Redis Template / CURD Repository.
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Master-Slave(Clustering)-Spring Boot: Distributed Cache:Docker Compose
+......................................................................
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
